@@ -1,5 +1,4 @@
 require 'redmine'
-require 'dispatcher'
 require 'http_auth_patch'
  
 Redmine::Plugin.register :redmine_http_auth do
@@ -22,7 +21,7 @@ Redmine::Plugin.register :redmine_http_auth do
     }
 end
 
-Dispatcher.to_prepare do
+ActionDispatch::Callbacks.to_prepare do
   #include our code
   ApplicationController.send(:include, HTTPAuthPatch)
 end
